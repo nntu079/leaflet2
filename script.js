@@ -9,7 +9,6 @@ var formSearch = document.getElementById("formSearch")
 
 currentMap = 1
 
-
 function init() {
 
     render()
@@ -43,6 +42,17 @@ function render() {
     currentMap == 1 ? map1.style.display = "block" : map1.style.display = "none"
     currentMap == 2 ? map2.style.display = "block" : map2.style.display = "none"
     currentMap == 3 ? map3.style.display = "block" : map3.style.display = "none"
+
+    leafLet()
+}
+
+function leafLet() {
+    var map = L.map('map' + currentMap).setView([52, -3], 5);
+    //OSM layer
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map)
 }
 
 init()
