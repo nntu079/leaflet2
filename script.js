@@ -55,7 +55,49 @@ function leafLet() {
     osm.addTo(map)
 
 
-    L.geoJSON(buildup).addTo(map);
+    var rootUrl = 'http://localhost:8080/geoserver/ne/ows';
+
+    var defaultParameters = {
+        service: 'WFS',
+        version: '1.0.0',
+        request: 'GetFeature',
+        typeName: 'ne:national_parks_august_2016_full_clipped_boundaries_in_great_bri',
+        maxFeatures: 200,
+        outputFormat: 'text/javascript',
+        format_options: 'callback: getJson',
+        srsName: 'EPSG:4326'
+
+    };
+
+    var parameters = L.Util.extend(defaultParameters);
+
+    $.ajax({
+        jsonp: false,
+        url: rootUrl + L.Util.getParamString(parameters),
+        dataType: 'jsonp',
+        jsonpCallback: 'getJson',
+        success: handleJson
+    });
+
+
+    var group = new L.featureGroup().addTo(map);
+    var geojsonlayer;
+    function handleJson(data) {
+        console.log({ data })
+        geojsonlayer = L.geoJson(data, {
+            style: function (feature) {
+                return { color: '#e75025' };
+            }
+        }).addTo(group);
+        map.fitBounds(group.getBounds());
+    }
+
+
+
+    function getJson(data) {
+        console.log("callback function fired");
+    }
+
 
 
 }
