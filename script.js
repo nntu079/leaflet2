@@ -11,21 +11,23 @@ currentMap = 1
 
 function init() {
 
-    render()
+    let map = initMap()
+
+    fetchData({ map, keywords: "" })
 
     nav1.addEventListener("click", (e) => {
         currentMap = 1
-        render()
+        fetchData({ map, keywords: "" })
     })
 
     nav2.addEventListener("click", (e) => {
         currentMap = 2
-        render()
+        fetchData({ map, keywords: "" })
     })
 
     nav3.addEventListener("click", (e) => {
         currentMap = 3
-        render()
+        fetchData({ map, keywords: "" })
     })
 
     formSearch.addEventListener("submit", (e) => {
@@ -33,28 +35,23 @@ function init() {
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
 
-        console.log({ data: formProps })
+        fetchData({ map, keywords: formProps.keywords })
     })
-
 }
 
-function render() {
+function render(data = {}) {
+
+    const keywords = data?.keywords
+
+
     currentMap == 1 ? map1.style.display = "block" : map1.style.display = "none"
     currentMap == 2 ? map2.style.display = "block" : map2.style.display = "none"
     currentMap == 3 ? map3.style.display = "block" : map3.style.display = "none"
 
-    leafLet()
+    leafLet(keywords)
 }
 
-function leafLet() {
-    var map = L.map('map' + currentMap).setView([52, -3], 8);
-    //OSM layer
-    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    osm.addTo(map)
-
-
+function fetchData({ map, keywords }) {
     var rootUrl = 'http://localhost:8080/geoserver/ne/ows';
 
     var defaultParameters = {
@@ -82,24 +79,45 @@ function leafLet() {
 
     var group = new L.featureGroup().addTo(map);
     var geojsonlayer;
+
     function handleJson(data) {
-        console.log({ data })
         geojsonlayer = L.geoJson(data, {
             style: function (feature) {
-                return { color: '#e75025' };
+                let name = feature.properties?.npark16nm?.toString()
+
+                if (keywords && name && name.toLowerCase().includes(keywords?.toLowerCase())) {
+
+                    return { color: '#e75025' };
+                }
+            },
+            onEachFeature: function (feature, layer) {
+                let name = feature.properties?.npark16nm?.toString()
+
+                layer.bindPopup(`
+                <div>
+                    <h1> Name: ${name}</h1>
+
+                </div>
+                `);
             }
         }).addTo(group);
         map.fitBounds(group.getBounds());
     }
 
-
-
     function getJson(data) {
         console.log("callback function fired");
     }
+}
 
+function initMap() {
+    var map = L.map('map' + currentMap).setView([52, -3], 8);
+    //OSM layer
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map)
 
-
+    return map
 }
 
 init()
