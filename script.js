@@ -52,6 +52,15 @@ function render(data = {}) {
 }
 
 function fetchData({ map, keywords }) {
+    var nexrad = L.tileLayer.wms("https://ces-gis.southwales.ac.uk:2345/geoserver/s20/wms", {
+        layers: 's20:my_hills',
+        format: 'image/png',
+        transparent: true
+    });
+    nexrad.addTo(map)
+
+
+    /*
     var rootUrl = 'http://localhost:8080/geoserver/ne/ows';
 
     var defaultParameters = {
@@ -111,6 +120,7 @@ function fetchData({ map, keywords }) {
     function getJson(data) {
         console.log("callback function fired");
     }
+    */
 }
 
 function initMap() {
