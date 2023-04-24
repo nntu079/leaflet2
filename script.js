@@ -92,11 +92,15 @@ function fetchData({ map, keywords }) {
             },
             onEachFeature: function (feature, layer) {
                 let name = feature.properties?.npark16nm?.toString()
+                let area = feature.properties?.st_areasha?.toString()
+                let len = feature.properties?.st_lengths?.toString()
+
 
                 layer.bindPopup(`
                 <div>
-                    <h1> Name: ${name}</h1>
-
+                    <div> Name: ${name}</div>
+                    <div> Area: ${area} </div>
+                    <div> Length: ${area} </div>
                 </div>
                 `);
             }
