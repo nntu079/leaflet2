@@ -52,27 +52,28 @@ function render(data = {}) {
 }
 
 function fetchData({ map, keywords }) {
+    /*
     var nexrad = L.tileLayer.wms("https://ces-gis.southwales.ac.uk:2345/geoserver/s20/wms", {
         layers: 's20:my_hills',
         format: 'image/png',
         transparent: true
     });
     nexrad.addTo(map)
+    */
 
 
-    /*
-    var rootUrl = 'http://localhost:8080/geoserver/ne/ows';
+
+    var rootUrl = 'https://ces-gis.southwales.ac.uk:2345/geoserver/s17/ows';
 
     var defaultParameters = {
         service: 'WFS',
         version: '1.0.0',
         request: 'GetFeature',
-        typeName: 'ne:national_parks_august_2016_full_clipped_boundaries_in_great_bri',
+        typeName: 's17:nationalparkswales',
         maxFeatures: 200,
         outputFormat: 'text/javascript',
         format_options: 'callback: getJson',
         srsName: 'EPSG:4326'
-
     };
 
     var parameters = L.Util.extend(defaultParameters);
@@ -92,24 +93,24 @@ function fetchData({ map, keywords }) {
     function handleJson(data) {
         geojsonlayer = L.geoJson(data, {
             style: function (feature) {
-                let name = feature.properties?.npark16nm?.toString()
+                let NP_NAME = feature.properties?.NP_NAME?.toString()
 
-                if (keywords && name && name.toLowerCase().includes(keywords?.toLowerCase())) {
+                if (keywords && NP_NAME && NP_NAME.toLowerCase().includes(keywords?.toLowerCase())) {
 
                     return { color: '#e75025' };
                 }
             },
             onEachFeature: function (feature, layer) {
-                let name = feature.properties?.npark16nm?.toString()
-                let area = feature.properties?.st_areasha?.toString()
-                let len = feature.properties?.st_lengths?.toString()
+                let NP_NAME = feature.properties?.NP_NAME?.toString()
+                let AREA_HA = feature.properties?.AREA_HA?.toString()
+                let DESIG_DATE = feature.properties?.DESIG_DATE?.toString()
 
 
                 layer.bindPopup(`
-                <div>
-                    <div> Name: ${name}</div>
-                    <div> Area: ${area} </div>
-                    <div> Length: ${area} </div>
+                <div> 
+                <div> DESIG_DATE: ${DESIG_DATE} </div>
+                    <div> Name: ${NP_NAME}</div>
+                    <div> AREA_HA: ${AREA_HA} </div>
                 </div>
                 `);
             }
@@ -120,7 +121,7 @@ function fetchData({ map, keywords }) {
     function getJson(data) {
         console.log("callback function fired");
     }
-    */
+
 }
 
 function initMap() {
