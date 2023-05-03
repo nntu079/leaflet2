@@ -1,10 +1,9 @@
 <?php
 
-
-$host = 'ces-gis';
+$host = 'localhost';
 $port = '5432';
-$dbname = 's20';
-$user = 's20';
+$dbname = 'geo2';
+$user = 'postgres';
 $password = 'password';
 
 $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");

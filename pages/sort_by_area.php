@@ -1,5 +1,5 @@
 <?php
-include 'db_conn.php';
+include '../db_conn.php';
 
 
 $sql = "select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri order by st_areasha desc";
