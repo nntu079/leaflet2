@@ -1,9 +1,14 @@
 <?php
-include "../db_conn.php";
+include '../db_conn.php';
+
+
+$sql = "select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri";
+
+$result = pg_query($conn, $sql);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+
+
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +24,8 @@ include "../db_conn.php";
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
+    <!-- jiquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
         #map {
@@ -30,6 +37,26 @@ include "../db_conn.php";
 </head>
 
 <body>
+
+    <script>
+        $.ajax({
+            type: "POST",
+            url: 'map1_db.php',
+            dataType: 'json',
+            data: {
+                test: "test"
+            },
+
+            success: function(obj, textstatus) {
+
+                console.log({
+                    obj,
+                    a: "a"
+                })
+
+            }
+        });
+    </script>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -53,63 +80,41 @@ include "../db_conn.php";
                     </li>
 
 
-                    <a class="nav-link" href="./map1_details.php" role="button" aria-expanded="false">
-                        View details
-                    </a>
-
-                    <liv class="nav-item">
-                        <select id="change_view" class="custom-select">
-                            <option value="1">OMS</option>
-                            <option value="2">Google Sreet</option>
-                            <option value="3">WaterColor</option>
-                        </select>
-                    </liv>
-
-
 
                 </ul>
-                <form class="d-flex" role="search" id="formSearch">
-                    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+
             </div>
         </div>
     </nav>
-    <div id="spinner">
-        <div class="spinner-grow text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-secondary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-danger" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-light" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-dark" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
 
-    <div id="map">
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">objectid</th>
+                <th scope="col">npark16cd</th>
+                <th scope="col">npark16nm</th>
+                <th scope="col">npark16nmw</th>
+                <th scope="col">st_areasha</th>
+                <th scope="col">st_lengths</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../mylibs/index.js"> </script>
-    <script src="../scripts/map1.js"> </script>
+            <?php
+            if (pg_num_rows($result) > 0) {
+                while ($results = pg_fetch_array($result)) {
+                    echo '<tr>
+                    <td scope="row">' . $results["objectid"] . '</td>
+                    <td>' . $results["npark16cd"] . '</td>
+                    <td> ' . $results["npark16nm"] . '</td>
+                    <td> ' . $results["npark16nmw"] . '</td>
+                    <td> ' . $results["st_areasha"] . '</td>
+                    <td> ' . $results["st_lengths"] . '</td>
+                 
+                  </tr>';
+                }
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
-
-
-
-</html>

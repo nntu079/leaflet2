@@ -53,8 +53,8 @@ include "../db_conn.php";
                     </li>
 
 
-                    <a class="nav-link" href="./sort_by_area.php" role="button" aria-expanded="false">
-                        Xem chi tiết
+                    <a class="nav-link" href="./map3_details.php" role="button" aria-expanded="false">
+                        View details
                     </a>
 
                     <liv class="nav-item">
@@ -64,8 +64,6 @@ include "../db_conn.php";
                             <option value="3">WaterColor</option>
                         </select>
                     </liv>
-
-
 
                 </ul>
                 <form class="d-flex" role="search" id="formSearch">

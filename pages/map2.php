@@ -53,7 +53,7 @@ include "../db_conn.php";
                     </li>
 
 
-                    <a class="nav-link" href="./sort_by_area.php" role="button" aria-expanded="false">
+                    <a class="nav-link" href="./map2_details.php" role="button" aria-expanded="false">
                         Xem chi tiết
                     </a>
 
