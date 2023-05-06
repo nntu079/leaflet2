@@ -2,6 +2,8 @@ var mapDiv = document.getElementById("map")
 var spinner = document.getElementById("spinner")
 var formSearch = document.getElementById("formSearch")
 var changeView = document.getElementById("change_view")
+var submmit = document.getElementById("submit")
+
 
 
 function initMap() {
@@ -20,17 +22,23 @@ function init() {
 
     let map = initMap()
 
+
     fetchData({ map, keywords: "" })
 
     formSearch.addEventListener("submit", (e) => {
         e.preventDefault()
+
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
 
         fetchData({ map, keywords: formProps.keywords })
+
     })
 
+
+
     changeView.addEventListener("change", (e) => {
+
         const value = e.target.value
         if (value == "1") {
             getOSMLayer().addTo(map)
@@ -79,10 +87,9 @@ function fetchData({ map, keywords }) {
     function handleJson(data) {
         geojsonlayer = L.geoJson(data, {
             style: function (feature) {
-                let NP_NAME = feature.properties?.NP_NAME?.toString()
+                let NP_NAME = feature.properties?.npark16nm?.toString()
 
                 if (keywords && NP_NAME && NP_NAME.toLowerCase().includes(keywords?.toLowerCase())) {
-
                     return { color: 'red' };
                 } else {
                     return { color: 'green' };
@@ -97,7 +104,7 @@ function fetchData({ map, keywords }) {
                 layer.bindPopup(`
                 <div> 
                     <div> Name: ${NP_NAME}</div>
-                    <div> AREA_HA: ${AREA_HA} </div>
+                    <div> Area_HA: ${AREA_HA} </div>
                     <div> Length: ${DESIG_DATE} </div>
                 </div>
                 `);

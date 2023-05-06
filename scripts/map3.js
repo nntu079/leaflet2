@@ -24,6 +24,7 @@ function init() {
 
     formSearch.addEventListener("submit", (e) => {
         e.preventDefault()
+
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
 
@@ -79,7 +80,7 @@ function fetchData({ map, keywords }) {
     function handleJson(data) {
         geojsonlayer = L.geoJson(data, {
             style: function (feature) {
-                let NP_NAME = feature.properties?.NP_NAME?.toString()
+                let NP_NAME = feature.properties?.tcity15nm?.toString()
 
                 if (keywords && NP_NAME && NP_NAME.toLowerCase().includes(keywords?.toLowerCase())) {
 
@@ -89,7 +90,7 @@ function fetchData({ map, keywords }) {
                 }
             },
             onEachFeature: function (feature, layer) {
-                let NP_NAME = feature.properties?.npark16nm?.toString()
+                let NP_NAME = feature.properties?.tcity15nm?.toString()
                 let AREA_HA = feature.properties?.st_areasha?.toString()
                 let DESIG_DATE = feature.properties?.st_lengths?.toString()
 
@@ -97,7 +98,7 @@ function fetchData({ map, keywords }) {
                 layer.bindPopup(`
                 <div> 
                     <div> Name: ${NP_NAME}</div>
-                    <div> AREA_HA: ${AREA_HA} </div>
+                    <div> Area_HA: ${AREA_HA} </div>
                     <div> Length: ${DESIG_DATE} </div>
                 </div>
                 `);

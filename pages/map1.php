@@ -1,7 +1,3 @@
-<?php
-include "../db_conn.php";
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +29,7 @@ include "../db_conn.php";
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HOAISON 1</a>
+            <a class="navbar-brand" href="#">HOAISON </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -70,7 +66,7 @@ include "../db_conn.php";
                 </ul>
                 <form class="d-flex" role="search" id="formSearch">
                     <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" id="submit">Search</button>
                 </form>
             </div>
         </div>

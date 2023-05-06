@@ -1,15 +1,3 @@
-<?php
-include '../db_conn.php';
-
-
-$sql = "select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri";
-
-$result = pg_query($conn, $sql);
-?>
-
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,29 +26,10 @@ $result = pg_query($conn, $sql);
 
 <body>
 
-    <script>
-        $.ajax({
-            type: "POST",
-            url: 'map1_db.php',
-            dataType: 'json',
-            data: {
-                test: "test"
-            },
-
-            success: function(obj, textstatus) {
-
-                console.log({
-                    obj,
-                    a: "a"
-                })
-
-            }
-        });
-    </script>
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HOAISON 1</a>
+            <a class="navbar-brand" href="#">HOAISON </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -78,43 +47,114 @@ $result = pg_query($conn, $sql);
                     <li class="nav-item">
                         <a href="./map3.php" id="nav3" class="nav-link">Major Towns and Cities</a>
                     </li>
-
-
-
                 </ul>
 
             </div>
         </div>
     </nav>
 
-    <table class="table">
+    <div class="mb-3">
+        <label class="form-label">Area</label>
+        <input id="filter" class="form-control bootstrap-table-filter-control-price"></input>
+    </div>
+
+    <table class="table" id="table">
         <thead>
             <tr>
                 <th scope="col">objectid</th>
                 <th scope="col">npark16cd</th>
-                <th scope="col">npark16nm</th>
+                <th scope="col" onclick="SortByName()" style="cursor:pointer">npark16nm</th>
                 <th scope="col">npark16nmw</th>
-                <th scope="col">st_areasha</th>
+                <th scope="col" onclick="SortByArea()" style="cursor:pointer">st_areasha</th>
                 <th scope="col">st_lengths</th>
             </tr>
         </thead>
         <tbody>
-
-            <?php
-            if (pg_num_rows($result) > 0) {
-                while ($results = pg_fetch_array($result)) {
-                    echo '<tr>
-                    <td scope="row">' . $results["objectid"] . '</td>
-                    <td>' . $results["npark16cd"] . '</td>
-                    <td> ' . $results["npark16nm"] . '</td>
-                    <td> ' . $results["npark16nmw"] . '</td>
-                    <td> ' . $results["st_areasha"] . '</td>
-                    <td> ' . $results["st_lengths"] . '</td>
-                 
-                  </tr>';
-                }
-            }
-            ?>
         </tbody>
     </table>
+
+    <script>
+        var table = document.getElementById("table");
+        var filter = document.getElementById("filter")
+        var countArea = 0
+        var countName = 0
+
+        function getData(sql) {
+            for (var i = 1; i < table.rows.length;) {
+                table.deleteRow(i);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '../db/db_query.php',
+                dataType: 'json',
+                data: {
+                    sql
+                },
+                success: function(obj, textstatus) {
+                    obj.forEach(element => {
+                        var row = table.insertRow(-1);
+
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+
+                        cell1.innerHTML = element.objectid;
+                        cell2.innerHTML = element.npark16cd;
+                        cell3.innerHTML = element.npark16nm;
+                        cell4.innerHTML = element.npark16nmw;
+                        cell5.innerHTML = element.st_areasha;
+                        cell6.innerHTML = element.st_lengths;
+                    });
+                }
+            });
+        }
+
+        getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+
+        function SortByArea() {
+            countArea = countArea + 1;
+            if (countArea % 2 == 0) {
+                getData(`select * 
+                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                order by st_areasha ASC 
+                `)
+            } else {
+                getData(`select * 
+                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                order by st_areasha DESC 
+                `)
+            }
+        }
+
+        function SortByName() {
+            countName = countName + 1;
+            if (countName % 2 == 0) {
+                getData(`select * 
+                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                order by npark16nm ASC 
+                `)
+            } else {
+                getData(`select * 
+                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                order by npark16nm DESC 
+                `)
+            }
+        }
+
+        filter.addEventListener("change", (e) => {
+            value = e.target.value
+            if (value) {
+                getData(`select * 
+                        from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                        where st_areasha >= ${value}
+                `)
+            } else {
+                getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+            }
+        })
+    </script>
 </body>

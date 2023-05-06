@@ -1,5 +1,6 @@
 <?php
-include '../db_conn.php';
+include '.././db/db_conn.php';
+
 
 
 $sql = "select * from builtup_areas_december_2011_boundaries_v2";
@@ -22,6 +23,8 @@ $result = pg_query($conn, $sql);
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
+    <!-- jiquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
         #map {
@@ -36,7 +39,7 @@ $result = pg_query($conn, $sql);
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HOAISON 1</a>
+            <a class="navbar-brand" href="#">HOAISON</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,11 +47,11 @@ $result = pg_query($conn, $sql);
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a href="./map1.php" id="nav1" class="nav-link active" aria-current="page">National Parks</a>
+                        <a href="./map1.php" id="nav1" class="nav-link " aria-current="page">National Parks</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="./map2.php" id="nav2" class="nav-link" aria-current="page">Builtup Areas</a>
+                        <a href="./map2.php" id="nav2" class="nav-link active" aria-current="page">Builtup Areas</a>
                     </li>
 
                     <li class="nav-item">
@@ -63,34 +66,109 @@ $result = pg_query($conn, $sql);
         </div>
     </nav>
 
-    <table class="table">
+    <div class="mb-3">
+        <label class="form-label">Area</label>
+        <input id="filter" class="form-control bootstrap-table-filter-control-price"></input>
+    </div>
+
+    <table class="table" id="table">
         <thead>
             <tr>
                 <th scope="col">objectid</th>
                 <th scope="col">bua11cd</th>
-                <th scope="col">bua11nm</th>
+                <th scope="col" onclick="SortByName()" style="cursor:pointer">bua11nm</th>
                 <th scope="col">urban_bua</th>
-                <th scope="col">st_areasha</th>
+                <th scope="col" onclick="SortByArea()" style="cursor:pointer">st_areasha</th>
                 <th scope="col">st_lengths</th>
             </tr>
         </thead>
         <tbody>
 
-            <?php
-            if (pg_num_rows($result) > 0) {
-                while ($results = pg_fetch_array($result)) {
-                    echo '<tr>
-                    <td scope="row">' . $results["objectid"] . '</td>
-                    <td>' . $results["bua11cd"] . '</td>
-                    <td> ' . $results["bua11nm"] . '</td>
-                    <td> ' . $results["urban_bua"] . '</td>
-                    <td> ' . $results["st_areasha"] . '</td>
-                    <td> ' . $results["st_lengths"] . '</td>
-                 
-                  </tr>';
-                }
-            }
-            ?>
         </tbody>
     </table>
+
+    <script>
+        var table = document.getElementById("table");
+        var countArea = 0
+        var countName = 0
+
+        function getData(sql) {
+            for (var i = 1; i < table.rows.length;) {
+                table.deleteRow(i);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '../db/db_query.php',
+                dataType: 'json',
+                data: {
+                    sql
+                },
+                success: function(obj, textstatus) {
+                    obj.forEach(element => {
+                        var row = table.insertRow(-1);
+
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
+                        var cell4 = row.insertCell(3);
+                        var cell5 = row.insertCell(4);
+                        var cell6 = row.insertCell(5);
+
+                        cell1.innerHTML = element.objectid;
+                        cell2.innerHTML = element.bua11cd;
+                        cell3.innerHTML = element.bua11nm;
+                        cell4.innerHTML = element.urban_bua;
+                        cell5.innerHTML = element.st_areasha;
+                        cell6.innerHTML = element.st_lengths;
+                    });
+                }
+            });
+        }
+
+        getData("select * from builtup_areas_december_2011_boundaries_v2")
+
+        function SortByArea() {
+            countArea = countArea + 1;
+            if (countArea % 2 == 0) {
+                getData(`select * 
+                from builtup_areas_december_2011_boundaries_v2
+                order by st_areasha ASC 
+                `)
+            } else {
+                getData(`select * 
+                from builtup_areas_december_2011_boundaries_v2
+                order by st_areasha DESC 
+                `)
+            }
+        }
+
+        function SortByName() {
+            countName = countName + 1;
+            if (countName % 2 == 0) {
+                getData(`select * 
+                from builtup_areas_december_2011_boundaries_v2
+                order by bua11nm ASC 
+                `)
+            } else {
+                getData(`select * 
+                from builtup_areas_december_2011_boundaries_v2
+                order by bua11nm DESC 
+                `)
+            }
+        }
+
+        filter.addEventListener("change", (e) => {
+            value = e.target.value
+            if (value) {
+                getData(`select * 
+                        from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                        where st_areasha >= ${value}
+                `)
+            } else {
+                getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+            }
+        })
+    </script>
+
 </body>
