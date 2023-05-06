@@ -53,10 +53,39 @@
         </div>
     </nav>
 
+    <div id="spinner">
+        <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
     <div class="mb-3">
         <label class="form-label">Area</label>
         <input id="filter" class="form-control bootstrap-table-filter-control-price"></input>
     </div>
+
+
 
     <table class="table" id="table">
         <thead>
@@ -73,13 +102,22 @@
         </tbody>
     </table>
 
+    <script src="../mylibs/index.js"> </script>
+
     <script>
         var table = document.getElementById("table");
         var filter = document.getElementById("filter")
         var countArea = 0
         var countName = 0
 
+        var mapDiv = document.getElementById("table")
+        var spinner = document.getElementById("spinner")
+
+
+
         function getData(sql) {
+            loading(true, mapDiv, spinner)
+
             for (var i = 1; i < table.rows.length;) {
                 table.deleteRow(i);
             }
@@ -109,6 +147,8 @@
                         cell5.innerHTML = element.st_areasha;
                         cell6.innerHTML = element.st_lengths;
                     });
+
+                    loading(false, mapDiv, spinner)
                 }
             });
         }
