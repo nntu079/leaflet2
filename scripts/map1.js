@@ -4,8 +4,6 @@ var formSearch = document.getElementById("formSearch")
 var changeView = document.getElementById("change_view")
 var submmit = document.getElementById("submit")
 
-
-
 function initMap() {
     var map = L.map('map').setView([52, -3], 8);
 
@@ -17,11 +15,9 @@ function initMap() {
     return map
 }
 
-
 function init() {
 
     let map = initMap()
-
 
     fetchData({ map, keywords: "" })
 
@@ -34,8 +30,6 @@ function init() {
         fetchData({ map, keywords: formProps.keywords })
 
     })
-
-
 
     changeView.addEventListener("change", (e) => {
 
@@ -52,7 +46,6 @@ function init() {
     })
 
 }
-
 
 function fetchData({ map, keywords }) {
     loading(true, mapDiv, spinner)
