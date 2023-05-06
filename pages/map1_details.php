@@ -113,7 +113,7 @@
             });
         }
 
-        getData("select * from 'National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri'")
+        getData(`select * from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"`)
 
         function SortByArea() {
             countArea = countArea + 1;
