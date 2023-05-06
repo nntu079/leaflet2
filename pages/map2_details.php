@@ -126,18 +126,18 @@ $result = pg_query($conn, $sql);
             });
         }
 
-        getData("select * from builtup_areas_december_2011_boundaries_v2")
+        getData(`select * from "Builtup_Areas_December_2011_Boundaries_V2"`)
 
         function SortByArea() {
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
                 getData(`select * 
-                from builtup_areas_december_2011_boundaries_v2
+                from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by st_areasha ASC 
                 `)
             } else {
                 getData(`select * 
-                from builtup_areas_december_2011_boundaries_v2
+                from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by st_areasha DESC 
                 `)
             }
@@ -147,12 +147,12 @@ $result = pg_query($conn, $sql);
             countName = countName + 1;
             if (countName % 2 == 0) {
                 getData(`select * 
-                from builtup_areas_december_2011_boundaries_v2
+                from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by bua11nm ASC 
                 `)
             } else {
                 getData(`select * 
-                from builtup_areas_december_2011_boundaries_v2
+                from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by bua11nm DESC 
                 `)
             }
@@ -162,11 +162,11 @@ $result = pg_query($conn, $sql);
             value = e.target.value
             if (value) {
                 getData(`select * 
-                        from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                        from "Builtup_Areas_December_2011_Boundaries_V2"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+                getData(`select * from "Builtup_Areas_December_2011_Boundaries_V2"`)
             }
         })
     </script>

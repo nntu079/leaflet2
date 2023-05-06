@@ -119,12 +119,12 @@
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
                 getData(`select * 
-                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by st_areasha ASC 
                 `)
             } else {
                 getData(`select * 
-                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by st_areasha DESC 
                 `)
             }
@@ -134,12 +134,12 @@
             countName = countName + 1;
             if (countName % 2 == 0) {
                 getData(`select * 
-                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by npark16nm ASC 
                 `)
             } else {
                 getData(`select * 
-                from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by npark16nm DESC 
                 `)
             }
@@ -149,11 +149,11 @@
             value = e.target.value
             if (value) {
                 getData(`select * 
-                        from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                        from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+                getData(`select * from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"`)
             }
         })
     </script>

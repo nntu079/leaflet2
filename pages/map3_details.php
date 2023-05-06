@@ -114,18 +114,19 @@
             });
         }
 
-        getData("select * from major_towns_and_cities_december_2015_boundaries")
+        getData(`select * 
+        from "Major_Towns_and_Cities_December_2015_Boundaries"`)
 
         function SortByArea() {
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
                 getData(`select * 
-                from major_towns_and_cities_december_2015_boundaries
+                from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by st_areasha ASC 
                 `)
             } else {
                 getData(`select * 
-                from major_towns_and_cities_december_2015_boundaries
+                from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by st_areasha DESC 
                 `)
             }
@@ -135,12 +136,12 @@
             countName = countName + 1;
             if (countName % 2 == 0) {
                 getData(`select * 
-                from major_towns_and_cities_december_2015_boundaries
+                from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by tcity15nm ASC 
                 `)
             } else {
                 getData(`select * 
-                from major_towns_and_cities_december_2015_boundaries
+                from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by tcity15nm DESC 
                 `)
             }
@@ -150,11 +151,11 @@
             value = e.target.value
             if (value) {
                 getData(`select * 
-                        from national_parks_august_2016_full_clipped_boundaries_in_great_bri
+                        from "Major_Towns_and_Cities_December_2015_Boundaries"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData("select * from national_parks_august_2016_full_clipped_boundaries_in_great_bri")
+                getData(`select * from "Major_Towns_and_Cities_December_2015_Boundaries"`)
             }
         })
     </script>
