@@ -39,30 +39,30 @@ $result = pg_query($conn, $sql);
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HOAISON</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="navbar-brand" href="index.php">HOAISON << /a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    <li class="nav-item">
-                        <a href="./map1.php" id="nav1" class="nav-link " aria-current="page">National Parks</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map1.php" id="nav1" class="nav-link " aria-current="page">National Parks</a>
+                            </li>
 
-                    <li class="nav-item">
-                        <a href="./map2.php" id="nav2" class="nav-link active" aria-current="page">Builtup Areas</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map2.php" id="nav2" class="nav-link active" aria-current="page">Builtup Areas</a>
+                            </li>
 
-                    <li class="nav-item">
-                        <a href="./map3.php" id="nav3" class="nav-link">Major Towns and Cities</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map3.php" id="nav3" class="nav-link">Major Towns and Cities</a>
+                            </li>
 
 
 
-                </ul>
+                        </ul>
 
-            </div>
+                    </div>
         </div>
     </nav>
 

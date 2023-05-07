@@ -29,44 +29,44 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">HOAISON </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="navbar-brand" href="index.php">HOAISON < </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                    <li class="nav-item">
-                        <a href="./map1.php" id="nav1" class="nav-link active" aria-current="page">National Parks</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map1.php" id="nav1" class="nav-link active" aria-current="page">National Parks</a>
+                            </li>
 
-                    <li class="nav-item">
-                        <a href="./map2.php" id="nav2" class="nav-link" aria-current="page">Builtup Areas</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map2.php" id="nav2" class="nav-link" aria-current="page">Builtup Areas</a>
+                            </li>
 
-                    <li class="nav-item">
-                        <a href="./map3.php" id="nav3" class="nav-link active">Major Towns and Cities</a>
-                    </li>
+                            <li class="nav-item">
+                                <a href="./map3.php" id="nav3" class="nav-link active">Major Towns and Cities</a>
+                            </li>
 
 
-                    <a class="nav-link" href="./map3_details.php" role="button" aria-expanded="false">
-                        View details
-                    </a>
+                            <a class="nav-link" href="./map3_details.php" role="button" aria-expanded="false">
+                                View details
+                            </a>
 
-                    <liv class="nav-item">
-                        <select id="change_view" class="custom-select">
-                            <option value="1">OMS</option>
-                            <option value="2">Google Sreet</option>
-                            <option value="3">WaterColor</option>
-                        </select>
-                    </liv>
+                            <liv class="nav-item">
+                                <select id="change_view" class="custom-select">
+                                    <option value="1">OMS</option>
+                                    <option value="2">Google Sreet</option>
+                                    <option value="3">WaterColor</option>
+                                </select>
+                            </liv>
 
-                </ul>
-                <form class="d-flex" role="search" id="formSearch">
-                    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+                        </ul>
+                        <form class="d-flex" role="search" id="formSearch">
+                            <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
         </div>
     </nav>
     <div id="spinner">
