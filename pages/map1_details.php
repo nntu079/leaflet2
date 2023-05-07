@@ -74,6 +74,8 @@
         </tbody>
     </table>
 
+    <script src="../mylibs/index.js"> </script>
+
     <script>
         var table = document.getElementById("table");
         var filter = document.getElementById("filter")
