@@ -53,39 +53,11 @@
         </div>
     </nav>
 
-    <div id="spinner">
-        <div class="spinner-grow text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-secondary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-danger" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-light" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-dark" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
 
     <div class="mb-3">
         <label class="form-label">Area</label>
         <input id="filter" class="form-control bootstrap-table-filter-control-price"></input>
     </div>
-
-
 
     <table class="table" id="table">
         <thead>
@@ -101,8 +73,6 @@
         <tbody>
         </tbody>
     </table>
-
-    <script src="../mylibs/index.js"> </script>
 
     <script>
         var table = document.getElementById("table");
@@ -159,12 +129,12 @@
         function SortByArea() {
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
-                getData(`select * 
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths 
                 from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by st_areasha ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths 
                 from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by st_areasha DESC 
                 `)
@@ -174,12 +144,12 @@
         function SortByName() {
             countName = countName + 1;
             if (countName % 2 == 0) {
-                getData(`select * 
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths 
                 from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by npark16nm ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths 
                 from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                 order by npark16nm DESC 
                 `)
@@ -189,12 +159,12 @@
         filter.addEventListener("change", (e) => {
             value = e.target.value
             if (value) {
-                getData(`select * 
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths 
                         from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData(`select * from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"`)
+                getData(`select objectid,npark16cd,npark16nm,npark16nmw,st_areasha,st_lengths from "National_Parks_August_2016_Full_Clipped_Boundaries_in_Great_Bri"`)
             }
         })
     </script>

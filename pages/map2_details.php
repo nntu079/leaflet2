@@ -3,7 +3,7 @@ include '.././db/db_conn.php';
 
 
 
-$sql = "select * from builtup_areas_december_2011_boundaries_v2";
+$sql = "select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths from builtup_areas_december_2011_boundaries_v2";
 
 $result = pg_query($conn, $sql);
 ?>
@@ -66,33 +66,6 @@ $result = pg_query($conn, $sql);
         </div>
     </nav>
 
-    <div id="spinner">
-        <div class="spinner-grow text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-secondary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-success" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-danger" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-warning" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-light" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow text-dark" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-
     <div class="mb-3">
         <label class="form-label">Area</label>
         <input id="filter" class="form-control bootstrap-table-filter-control-price"></input>
@@ -154,17 +127,18 @@ $result = pg_query($conn, $sql);
             });
         }
 
-        getData(`select * from "Builtup_Areas_December_2011_Boundaries_V2"`)
+        getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
+        from "Builtup_Areas_December_2011_Boundaries_V2"`)
 
         function SortByArea() {
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
-                getData(`select * 
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
                 from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by st_areasha ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
                 from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by st_areasha DESC 
                 `)
@@ -174,12 +148,12 @@ $result = pg_query($conn, $sql);
         function SortByName() {
             countName = countName + 1;
             if (countName % 2 == 0) {
-                getData(`select * 
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
                 from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by bua11nm ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
                 from "Builtup_Areas_December_2011_Boundaries_V2"
                 order by bua11nm DESC 
                 `)
@@ -189,12 +163,12 @@ $result = pg_query($conn, $sql);
         filter.addEventListener("change", (e) => {
             value = e.target.value
             if (value) {
-                getData(`select * 
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths 
                         from "Builtup_Areas_December_2011_Boundaries_V2"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData(`select * from "Builtup_Areas_December_2011_Boundaries_V2"`)
+                getData(`select objectid,bua11cd,bua11nm,urban_bua,st_areasha,st_lengths from "Builtup_Areas_December_2011_Boundaries_V2"`)
             }
         })
     </script>
