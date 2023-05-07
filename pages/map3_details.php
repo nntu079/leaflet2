@@ -68,7 +68,7 @@
                 <th scope="col">tcity15cd</th>
                 <th scope="col" onclick="SortByName()" style="cursor:pointer">tcity15nm</th>
                 <th scope="col" onclick="SortByArea()" style="cursor:pointer">st_areasha</th>
-                <th scope="col">select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths</th>
+                <th scope="col">st_lengths</th>
             </tr>
         </thead>
         <tbody>
@@ -108,13 +108,13 @@
                         cell3.innerHTML = element.tcity15cd;
                         cell4.innerHTML = element.tcity15nm;
                         cell5.innerHTML = element.st_areasha;
-                        cell6.innerHTML = element.select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths;
+                        cell6.innerHTML = element.st_lengths;
                     });
                 }
             });
         }
 
-        getData(`select gid, objectid, tcity15cd, tcity15nm, st_areasha, select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths
+        getData(`select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths
         from "Major_Towns_and_Cities_December_2015_Boundaries"`)
 
         function SortByArea() {
