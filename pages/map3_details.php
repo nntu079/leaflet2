@@ -133,7 +133,7 @@
                         var cell5 = row.insertCell(4);
                         var cell6 = row.insertCell(5);
 
-                        cell1.innerHTML = element.gid;
+                        cell1.innerHTML = element.id;
                         cell2.innerHTML = element.objectid;
                         cell3.innerHTML = element.tcity15cd;
                         cell4.innerHTML = element.tcity15nm;
@@ -145,18 +145,18 @@
             });
         }
 
-        getData(`select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths
+        getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths
         from "Major_Towns_and_Cities_December_2015_Boundaries"`)
 
         function SortByArea() {
             countArea = countArea + 1;
             if (countArea % 2 == 0) {
-                getData(`select * 
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths 
                 from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by st_areasha ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths 
                 from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by st_areasha DESC 
                 `)
@@ -166,12 +166,12 @@
         function SortByName() {
             countName = countName + 1;
             if (countName % 2 == 0) {
-                getData(`select * 
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths 
                 from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by tcity15nm ASC 
                 `)
             } else {
-                getData(`select * 
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths 
                 from "Major_Towns_and_Cities_December_2015_Boundaries"
                 order by tcity15nm DESC 
                 `)
@@ -181,12 +181,12 @@
         filter.addEventListener("change", (e) => {
             value = e.target.value
             if (value) {
-                getData(`select * 
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths 
                         from "Major_Towns_and_Cities_December_2015_Boundaries"
                         where st_areasha >= ${value}
                 `)
             } else {
-                getData(`select * from "Major_Towns_and_Cities_December_2015_Boundaries"`)
+                getData(`select id, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths from "Major_Towns_and_Cities_December_2015_Boundaries"`)
             }
         })
     </script>
