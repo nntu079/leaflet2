@@ -1,11 +1,11 @@
 function loading(isLoading, map, spinner) {
     if (isLoading) {
-        map.style.display = "none"
-        spinner.style.display = "inline"
+        map?.style?.display = "none"
+        spinner?.style?.display = "inline"
     }
     else {
-        map.style.display = "block"
-        spinner.style.display = "none"
+        map?.style?.display = "block"
+        spinner?.style?.display = "none"
     }
 }
 
