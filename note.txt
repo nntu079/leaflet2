@@ -1,1 +1,2 @@
-Major_Towns_and_Cities_December_2015_Boundaries
+select gid, objectid, tcity15cd, tcity15nm, st_areasha, st_lengths
+        from "Major_Towns_and_Cities_December_2015_Boundaries"
